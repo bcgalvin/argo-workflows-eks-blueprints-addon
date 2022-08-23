@@ -5,7 +5,7 @@ const cdkVersion = '2.37.1';
 const eksBlueprintVersion = '1.2.0';
 const nodejsVersion = 'v16.16.0';
 const deps = [`aws-cdk-lib@${cdkVersion}`, 'ts-deepmerge', `@aws-quickstart/eks-blueprints@${eksBlueprintVersion}`];
-const commonIgnore = ['.idea', '.Rproj', '.vscode', 'cdk.context.json', '.DS_Store'];
+const commonIgnore = ['.idea', '.Rproj', '.vscode', 'cdk.context.json', '.DS_Store', 'examples/**/dist'];
 
 const project = new awscdk.AwsCdkConstructLibrary({
   author: 'Bryan Galvin',
