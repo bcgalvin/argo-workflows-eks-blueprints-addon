@@ -9,7 +9,7 @@ const env = {
 }
 
 const app = new cdk.App();
-new ArgoWorkflowsEksBlueprintAddonStack(app, 'ExampleConstructStack', {
+new ArgoWorkflowsEksBlueprintAddonStack(app, 'argo-workflows-blueprint-stack', {
 	env: env
 });
 
