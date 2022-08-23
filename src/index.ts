@@ -1,12 +1,12 @@
 import * as blueprints from '@aws-quickstart/eks-blueprints';
-import { ClusterInfo } from '@aws-quickstart/eks-blueprints';
+import { IBucket } from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
 import merge from 'ts-deepmerge';
 import { ValuesSchema } from './values';
 
-export interface ArgoWorkflowsAddOnProps extends blueprints.HelmAddOnUserProps {
-  values?: ValuesSchema;
-}
+export * from './s3-resource-provider';
+
+export interface ArgoWorkflowsAddOnProps extends blueprints.HelmAddOnUserProps, ValuesSchema {}
 
 export const defaultProps: blueprints.HelmAddOnProps = {
   name: 'argo',
@@ -18,12 +18,16 @@ export const defaultProps: blueprints.HelmAddOnProps = {
 };
 
 export class ArgoWorkflowsAddOn extends blueprints.HelmAddOn {
-  constructor(props: ArgoWorkflowsAddOnProps) {
+  readonly options: ArgoWorkflowsAddOnProps;
+
+  constructor(props?: ArgoWorkflowsAddOnProps) {
     super({ ...defaultProps, ...props });
+    this.options = { ...defaultProps, ...props };
   }
 
-  deploy(clusterInfo: ClusterInfo): Promise<Construct> {
+  deploy(clusterInfo: blueprints.ClusterInfo): Promise<Construct> {
     const cluster = clusterInfo.cluster;
+    const artifactRepositoryS3Bucket: IBucket = clusterInfo.getRequiredResource('artifactRepositoryS3Bucket');
 
     let values: ValuesSchema = {
       server: {
@@ -37,6 +41,7 @@ export class ArgoWorkflowsAddOn extends blueprints.HelmAddOn {
       useStaticCredentials: false,
       artifactRepository: {
         s3: {
+          bucket: artifactRepositoryS3Bucket.bucketName,
           region: cluster.stack.region,
           endpoint: 's3.amazonaws.com',
           useSDKCreds: true,
@@ -44,7 +49,6 @@ export class ArgoWorkflowsAddOn extends blueprints.HelmAddOn {
         },
       },
     };
-
     values = merge(values, this.props.values ?? {});
 
     const chart = this.addHelmChart(clusterInfo, values);
