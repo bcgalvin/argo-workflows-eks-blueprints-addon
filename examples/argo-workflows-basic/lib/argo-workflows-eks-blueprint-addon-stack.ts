@@ -59,7 +59,9 @@ export class ArgoWorkflowsEksBlueprintAddonStack extends Stack {
         new blueprints.ClusterAutoScalerAddOn(),
         new blueprints.XrayAddOn(),
         // Argo Workflows
-        new ArgoWorkflowsAddOn()
+        new ArgoWorkflowsAddOn({
+          workflow: {},
+        })
       )
       .enableControlPlaneLogTypes(blueprints.ControlPlaneLogType.API)
       .build(scope, `${id}-cluster`, {
