@@ -15,23 +15,20 @@ export class ArgoWorkflowsEksBlueprintAddonStack extends Stack {
 
     const addOns: Array<blueprints.ClusterAddOn> = [
       // EkS Addons
-      new blueprints.addons.VpcCniAddOn(),
-      new blueprints.addons.CoreDnsAddOn(),
-      new blueprints.addons.KubeProxyAddOn(),
-      new blueprints.addons.EbsCsiDriverAddOn(),
+      new blueprints.VpcCniAddOn(),
+      new blueprints.CoreDnsAddOn(),
+      new blueprints.KubeProxyAddOn(),
+      new blueprints.EbsCsiDriverAddOn(),
       // Helm Addons
-      new blueprints.addons.MetricsServerAddOn(),
-      new blueprints.addons.AwsLoadBalancerControllerAddOn(),
-      new blueprints.addons.CertManagerAddOn(),
+      new blueprints.MetricsServerAddOn(),
       // Cluster Addons
-      new blueprints.addons.AdotCollectorAddOn(),
-      new blueprints.addons.SSMAgentAddOn(),
-      new blueprints.addons.CloudWatchAdotAddOn(),
-      new blueprints.addons.XrayAddOn(),
+      new blueprints.SSMAgentAddOn(),
+      new blueprints.ClusterAutoScalerAddOn(),
+      new blueprints.XrayAddOn(),
     ];
 
     blueprints.EksBlueprint.builder()
-      .name('argo-workflows-example')
+      .name('argo-workflows')
       .account(account)
       .region(region)
       .version(kubeVersion)
