@@ -39,7 +39,7 @@ export class ArgoWorkflowsEksBlueprintAddonStack extends Stack {
     });
 
     blueprints.EksBlueprint.builder()
-      .name('argo-workflows')
+      .name('argo-wf-cluster')
       .account(account)
       .region(region)
       .clusterProvider(clusterProvider)
@@ -52,11 +52,12 @@ export class ArgoWorkflowsEksBlueprintAddonStack extends Stack {
         new blueprints.EbsCsiDriverAddOn(),
         // Helm Addons
         new blueprints.MetricsServerAddOn(),
+        new blueprints.SecretsStoreAddOn(),
+        new blueprints.KubeviousAddOn(),
         // Cluster Addons
         new blueprints.SSMAgentAddOn(),
         new blueprints.ClusterAutoScalerAddOn(),
         new blueprints.XrayAddOn(),
-        new blueprints.KubeviousAddOn(),
         // Argo Workflows
         new ArgoWorkflowsAddOn()
       )
