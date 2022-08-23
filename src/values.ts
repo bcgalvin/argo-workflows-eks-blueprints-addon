@@ -1,243 +1,243 @@
 export interface ValuesSchema {
-  images?: Images;
-  createAggregateRoles?: boolean;
-  nameOverride?: string;
-  fullnameOverride?: string;
-  kubeVersionOverride?: string;
-  singleNamespace?: boolean;
-  workflow?: Workflow;
-  controller?: Controller;
-  mainContainer?: Executor;
-  executor?: Executor;
-  server?: Server;
-  useDefaultArtifactRepo?: boolean;
-  useStaticCredentials?: boolean;
-  artifactRepository?: ArtifactRepository;
+  readonly images?: Images;
+  readonly createAggregateRoles?: boolean;
+  readonly nameOverride?: string;
+  readonly fullnameOverride?: string;
+  readonly kubeVersionOverride?: string;
+  readonly singleNamespace?: boolean;
+  readonly workflow?: Workflow;
+  readonly controller?: Controller;
+  readonly mainContainer?: Executor;
+  readonly executor?: Executor;
+  readonly server?: Server;
+  readonly useDefaultArtifactRepo?: boolean;
+  readonly useStaticCredentials?: boolean;
+  readonly artifactRepository?: ArtifactRepository;
 }
 
 export interface ArtifactRepository {
-  archiveLogs?: boolean;
-  s3?: S3;
-  gcs?: Values;
+  readonly archiveLogs?: boolean;
+  readonly s3?: S3;
+  readonly gcs?: Values;
 }
 
 export interface Values {
-  [key: string]: any;
+  readonly [key: string]: any;
 }
 
 export interface S3 {
-  accessKeySecret?: KeySecret;
-  secretKeySecret?: KeySecret;
-  insecure?: boolean;
-  bucket?: string;
-  endpoint?: string;
-  region?: string;
-  roleArn?: string;
-  useSDKCreds?: boolean;
-  encryptionOptions?: EncryptionOptions;
+  readonly accessKeySecret?: KeySecret;
+  readonly secretKeySecret?: KeySecret;
+  readonly insecure?: boolean;
+  readonly bucket?: string;
+  readonly endpoint?: string;
+  readonly region?: string;
+  readonly roleArn?: string;
+  readonly useSDKCreds?: boolean;
+  readonly encryptionOptions?: EncryptionOptions;
 }
 
 export interface EncryptionOptions {
-  enableEncryption?: boolean;
+  readonly enableEncryption?: boolean;
 }
 
 export interface KeySecret {
-  key?: string;
+  readonly key?: string;
 }
 
 export interface Controller {
-  image?: Image;
-  parallelism?: string;
-  resourceRateLimit?: Values;
-  rbac?: Rbac;
-  namespaceParallelism?: string;
-  initialDelay?: string;
-  deploymentAnnotations?: Values;
-  podAnnotations?: Values;
-  podLabels?: Values;
-  podSecurityContext?: Values;
-  metricsConfig?: Config;
-  securityContext?: SecurityContext;
-  persistence?: Values;
-  workflowDefaults?: Values;
-  workflowWorkers?: string;
-  workflowRestrictions?: Values;
-  telemetryConfig?: Config;
-  serviceMonitor?: ServiceMonitor;
-  serviceAccount?: ServiceAccount;
-  name?: string;
-  workflowNamespaces?: string[];
-  containerRuntimeExecutor?: string;
-  containerRuntimeExecutors?: any[];
-  instanceID?: InstanceID;
-  logging?: Logging;
-  serviceType?: string;
-  serviceAnnotations?: Values;
-  serviceLabels?: Values;
-  loadBalancerSourceRanges?: any[];
-  resources?: Values;
-  livenessProbe?: LivenessProbe;
-  extraEnv?: any[];
-  extraArgs?: any[];
-  volumeMounts?: any[];
-  volumes?: any[];
-  replicas?: number;
-  pdb?: ClusterWorkflowTemplates;
-  nodeSelector?: NodeSelector;
-  tolerations?: any[];
-  affinity?: Values;
-  priorityClassName?: string;
-  links?: any[];
-  navColor?: string;
-  clusterWorkflowTemplates?: ClusterWorkflowTemplates;
-  extraContainers?: any[];
+  readonly image?: Image;
+  readonly parallelism?: string;
+  readonly resourceRateLimit?: Values;
+  readonly rbac?: Rbac;
+  readonly namespaceParallelism?: string;
+  readonly initialDelay?: string;
+  readonly deploymentAnnotations?: Values;
+  readonly podAnnotations?: Values;
+  readonly podLabels?: Values;
+  readonly podSecurityContext?: Values;
+  readonly metricsConfig?: Config;
+  readonly securityContext?: SecurityContext;
+  readonly persistence?: Values;
+  readonly workflowDefaults?: Values;
+  readonly workflowWorkers?: string;
+  readonly workflowRestrictions?: Values;
+  readonly telemetryConfig?: Config;
+  readonly serviceMonitor?: ServiceMonitor;
+  readonly serviceAccount?: ServiceAccount;
+  readonly name?: string;
+  readonly workflowNamespaces?: string[];
+  readonly containerRuntimeExecutor?: string;
+  readonly containerRuntimeExecutors?: any[];
+  readonly instanceID?: InstanceID;
+  readonly logging?: Logging;
+  readonly serviceType?: string;
+  readonly serviceAnnotations?: Values;
+  readonly serviceLabels?: Values;
+  readonly loadBalancerSourceRanges?: any[];
+  readonly resources?: Values;
+  readonly livenessProbe?: LivenessProbe;
+  readonly extraEnv?: any[];
+  readonly extraArgs?: any[];
+  readonly volumeMounts?: any[];
+  readonly volumes?: any[];
+  readonly replicas?: number;
+  readonly pdb?: ClusterWorkflowTemplates;
+  readonly nodeSelector?: NodeSelector;
+  readonly tolerations?: any[];
+  readonly affinity?: Values;
+  readonly priorityClassName?: string;
+  readonly links?: any[];
+  readonly navColor?: string;
+  readonly clusterWorkflowTemplates?: ClusterWorkflowTemplates;
+  readonly extraContainers?: any[];
 }
 
 export interface ClusterWorkflowTemplates {
-  enabled?: boolean;
+  readonly enabled?: boolean;
 }
 
 export interface Image {
-  registry?: string;
-  repository?: string;
-  tag?: string;
+  readonly registry?: string;
+  readonly repository?: string;
+  readonly tag?: string;
 }
 
 export interface InstanceID {
-  enabled?: boolean;
-  useReleaseName?: boolean;
-  explicitID?: string;
+  readonly enabled?: boolean;
+  readonly useReleaseName?: boolean;
+  readonly explicitID?: string;
 }
 
 export interface LivenessProbe {
-  httpGet?: HTTPGet;
-  failureThreshold?: number;
-  initialDelaySeconds?: number;
-  periodSeconds?: number;
-  timeoutSeconds?: number;
+  readonly httpGet?: HTTPGet;
+  readonly failureThreshold?: number;
+  readonly initialDelaySeconds?: number;
+  readonly periodSeconds?: number;
+  readonly timeoutSeconds?: number;
 }
 
 export interface HTTPGet {
-  port?: number;
-  path?: string;
+  readonly port?: number;
+  readonly path?: string;
 }
 
 export interface Logging {
-  level?: string;
-  globallevel?: string;
+  readonly level?: string;
+  readonly globallevel?: string;
 }
 
 export interface Config {
-  enabled?: boolean;
-  path?: string;
-  port?: number;
-  portName?: string;
-  servicePort?: number;
-  servicePortName?: string;
+  readonly enabled?: boolean;
+  readonly path?: string;
+  readonly port?: number;
+  readonly portName?: string;
+  readonly servicePort?: number;
+  readonly servicePortName?: string;
 }
 
 export interface NodeSelector {
-  'kubernetes.io/os'?: string;
+  readonly 'kubernetes.io/os'?: string;
 }
 
 export interface Rbac {
-  create?: boolean;
+  readonly create?: boolean;
 }
 
 export interface SecurityContext {
-  readOnlyRootFilesystem?: boolean;
-  runAsNonRoot?: boolean;
-  allowPrivilegeEscalation?: boolean;
-  capabilities?: Capabilities;
+  readonly readOnlyRootFilesystem?: boolean;
+  readonly runAsNonRoot?: boolean;
+  readonly allowPrivilegeEscalation?: boolean;
+  readonly capabilities?: Capabilities;
 }
 
 export interface Capabilities {
-  drop?: string[];
+  readonly drop?: string[];
 }
 
 export interface ServiceAccount {
-  create?: boolean;
-  name?: string;
-  annotations?: Values;
+  readonly create?: boolean;
+  readonly name?: string;
+  readonly annotations?: Values;
 }
 
 export interface ServiceMonitor {
-  enabled?: boolean;
-  additionalLabels?: Values;
-  namespace?: string;
+  readonly enabled?: boolean;
+  readonly additionalLabels?: Values;
+  readonly namespace?: string;
 }
 
 export interface Executor {
-  image?: Image;
-  resources?: Values;
-  env?: Values;
-  securityContext?: Values;
-  imagePullPolicy?: string;
+  readonly image?: Image;
+  readonly resources?: Values;
+  readonly env?: Values;
+  readonly securityContext?: Values;
+  readonly imagePullPolicy?: string;
 }
 
 export interface Images {
-  tag?: string;
-  pullPolicy?: string;
-  pullSecrets?: any[];
+  readonly tag?: string;
+  readonly pullPolicy?: string;
+  readonly pullSecrets?: any[];
 }
 
 export interface Server {
-  enabled?: boolean;
-  baseHref?: string;
-  image?: Image;
-  deploymentAnnotations?: Values;
-  podAnnotations?: Values;
-  podLabels?: Values;
-  podSecurityContext?: Values;
-  rbac?: Rbac;
-  securityContext?: SecurityContext;
-  name?: string;
-  serviceType?: string;
-  servicePort?: number;
-  serviceNodePort?: string;
-  servicePortName?: string;
-  serviceAccount?: ServiceAccount;
-  serviceAnnotations?: Values;
-  serviceLabels?: Values;
-  loadBalancerIP?: string;
-  loadBalancerSourceRanges?: any[];
-  resources?: Values;
-  replicas?: number;
-  pdb?: ClusterWorkflowTemplates;
-  nodeSelector?: NodeSelector;
-  tolerations?: any[];
-  affinity?: Values;
-  priorityClassName?: string;
-  secure?: boolean;
-  extraEnv?: any[];
-  extraArgs?: any[];
-  volumeMounts?: any[];
-  volumes?: any[];
-  ingress?: Ingress;
-  clusterWorkflowTemplates?: PurpleClusterWorkflowTemplates;
-  sso?: Values;
-  extraContainers?: any[];
+  readonly enabled?: boolean;
+  readonly baseHref?: string;
+  readonly image?: Image;
+  readonly deploymentAnnotations?: Values;
+  readonly podAnnotations?: Values;
+  readonly podLabels?: Values;
+  readonly podSecurityContext?: Values;
+  readonly rbac?: Rbac;
+  readonly securityContext?: SecurityContext;
+  readonly name?: string;
+  readonly serviceType?: string;
+  readonly servicePort?: number;
+  readonly serviceNodePort?: string;
+  readonly servicePortName?: string;
+  readonly serviceAccount?: ServiceAccount;
+  readonly serviceAnnotations?: Values;
+  readonly serviceLabels?: Values;
+  readonly loadBalancerIP?: string;
+  readonly loadBalancerSourceRanges?: any[];
+  readonly resources?: Values;
+  readonly replicas?: number;
+  readonly pdb?: ClusterWorkflowTemplates;
+  readonly nodeSelector?: NodeSelector;
+  readonly tolerations?: any[];
+  readonly affinity?: Values;
+  readonly priorityClassName?: string;
+  readonly secure?: boolean;
+  readonly extraEnv?: any[];
+  readonly extraArgs?: any[];
+  readonly volumeMounts?: any[];
+  readonly volumes?: any[];
+  readonly ingress?: Ingress;
+  readonly clusterWorkflowTemplates?: PurpleClusterWorkflowTemplates;
+  readonly sso?: Values;
+  readonly extraContainers?: any[];
 }
 
 export interface PurpleClusterWorkflowTemplates {
-  enabled?: boolean;
-  enableEditing?: boolean;
+  readonly enabled?: boolean;
+  readonly enableEditing?: boolean;
 }
 
 export interface Ingress {
-  enabled?: boolean;
-  annotations?: Values;
-  labels?: Values;
-  ingressClassName?: string;
-  hosts?: any[];
-  paths?: string[];
-  pathType?: string;
-  extraPaths?: any[];
-  tls?: any[];
+  readonly enabled?: boolean;
+  readonly annotations?: Values;
+  readonly labels?: Values;
+  readonly ingressClassName?: string;
+  readonly hosts?: any[];
+  readonly paths?: string[];
+  readonly pathType?: string;
+  readonly extraPaths?: any[];
+  readonly tls?: any[];
 }
 
 export interface Workflow {
-  namespace?: string;
-  serviceAccount?: ServiceAccount;
-  rbac?: Rbac;
+  readonly namespace?: string;
+  readonly serviceAccount?: ServiceAccount;
+  readonly rbac?: Rbac;
 }
