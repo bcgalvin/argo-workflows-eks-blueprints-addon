@@ -58,7 +58,7 @@ arn:aws:cloudformation:us-west-2:1234789012:stack/argo-workflows-stack-cluster/7
 Get server deployment:
 
 ```bash
-(base) argo-workflows-eks-blueprints-addon [main●●] k get deployments -n argo
+(base) argo-workflows-eks-blueprints-addon [main] k get deployments -n argo
 NAME                                                  READY   UP-TO-DATE   AVAILABLE   AGE
 blueprints-addon-argo-workflows-server                1/1     1            1           116m
 blueprints-addon-argo-workflows-workflow-controller   1/1     1            1           116m
@@ -67,7 +67,7 @@ blueprints-addon-argo-workflows-workflow-controller   1/1     1            1    
 Open a port-forward to access the UI:
 
 ```bash
-(base) argo-workflows-eks-blueprints-addon [main●●] k -n argo port-forward deployment/blueprints-addon-argo-workflows-server 2746:2746
+(base) argo-workflows-eks-blueprints-addon [main] k -n argo port-forward deployment/blueprints-addon-argo-workflows-server 2746:2746
 Forwarding from 127.0.0.1:2746 -> 2746
 Forwarding from [::1]:2746 -> 2746
 Handling connection for 2746
