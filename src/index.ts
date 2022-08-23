@@ -1,4 +1,5 @@
 import * as blueprints from '@aws-quickstart/eks-blueprints';
+import { KubernetesManifest } from 'aws-cdk-lib/aws-eks';
 import { IBucket } from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
 import merge from 'ts-deepmerge';
@@ -28,13 +29,33 @@ export class ArgoWorkflowsAddOn extends blueprints.HelmAddOn {
   deploy(clusterInfo: blueprints.ClusterInfo): Promise<Construct> {
     const cluster = clusterInfo.cluster;
     const artifactRepositoryS3Bucket: IBucket = clusterInfo.getRequiredResource('artifactRepositoryS3Bucket');
+    const namespace = this.options.namespace;
+
+    const namespaceManifest = new KubernetesManifest(cluster.stack, 'external-dns-ns', {
+      cluster,
+      manifest: [
+        {
+          apiVersion: 'v1',
+          kind: 'Namespace',
+          metadata: { name: namespace },
+        },
+      ],
+      overwrite: true,
+    });
+
+    const sa = cluster.addServiceAccount(this.props.name, {
+      name: 'argo-workflows-sa',
+      namespace,
+    });
+    artifactRepositoryS3Bucket.grantReadWrite(sa);
+    sa.node.addDependency(namespaceManifest);
 
     let values: ValuesSchema = {
       server: {
         extraArgs: ['--auth-mode=server'],
       },
       workflow: {
-        serviceAccount: { create: true },
+        serviceAccount: { create: false }, // we create to give SA IRSA permissions
       },
       controller: { containerRuntimeExecutor: 'emissary' },
       useDefaultArtifactRepo: true,
@@ -52,6 +73,7 @@ export class ArgoWorkflowsAddOn extends blueprints.HelmAddOn {
     values = merge(values, this.props.values ?? {});
 
     const chart = this.addHelmChart(clusterInfo, values);
+    chart.node.addDependency(namespaceManifest);
     return Promise.resolve(chart);
   }
 }
