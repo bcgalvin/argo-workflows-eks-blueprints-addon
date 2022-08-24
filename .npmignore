@@ -5,6 +5,7 @@
 cdk.context.json
 .DS_Store
 examples/**/dist
+examples/**/node_modules
 /.projen/
 /test-reports/
 junit.xml
